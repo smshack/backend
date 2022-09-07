@@ -7,6 +7,7 @@ const app = express();
 const port = 31001;
 const appname = `mongo-app`
 
+const Routers = require('./routes/routes.js');
 const MONGO_URL = 'mongodb://127.0.0.1:27017/'
 const MONGODB_NAME = 'test'
 
@@ -25,6 +26,7 @@ mongoose.connect(`${MONGO_URL}${MONGODB_NAME}`, {
     console.log("mongodb connected");
 })
 
+app.use('/api', Routers);
 
 app.use((req, res, next) => {
     res.status(404).send('Not found')
