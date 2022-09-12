@@ -8,9 +8,7 @@ const UserSchemma = new mongoose.Schema({
     password: { type: String, required: true },
     name: { type: String, required: true },
     phone: { type: String, required: true },
-    smsalert: { type: Boolean, required: true },
-    authority: [{ type: ObjectId , ref: "user-authority" }],
-    photo: { type: Array, required: true },
+    // authority: [{ type: ObjectId , ref: "user-authority" }],
 }, { timestamps: true })
 
 const User = mongoose.model('user-permission', UserSchemma);

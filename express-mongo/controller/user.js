@@ -1,15 +1,10 @@
 const { User } = require('../models/user-permission');
 const _ = require('lodash')
 let UserController = {}
-//  유저 권한  관련
-// const UserSchemma = new mongoose.Schema({
-//     title: { type: String, required: true },
-// }, { timestapms: true })
 
-// }, { timestapms: true })
 /**
  * 
- *  유저 권한  조회
+ *  유저   조회
  * @param {*} req 
  * @param {id} res.params 
  * @param {limit, sort, title, page} res.query 
@@ -34,18 +29,18 @@ UserController.getUser = async (req, res, next) => {
 }
 /**
  * 
- *  유저 권한  생성
+ *  유저   생성
  * @param {*} req 
  * @param {} res.params 
  * @param {} res.query 
- * @param { userid , email, password, name, phone, smsalert, authority, photo  } res.body 
+ * @param { userid , email, password, name, phone  } res.body 
  * @param {*} next 
  */
 UserController.createUser = async (req, res, next) => {
-    const { userid , email, password, name, phone, smsalert, authority, photo  } = req.body;
+    const { userid , email, password, name, phone  } = req.body;
     try {
         const result = await User.updateOne(
-            { userid , email, password, name, phone, smsalert, authority, photo  },
+            { userid , email, password, name, phone  },
             req.body,
             { upsert: true })
 
@@ -57,17 +52,17 @@ UserController.createUser = async (req, res, next) => {
 
 /**
  * 
- *  유저 권한  수정
+ *  유저   수정
  * @param {*} req 
  * @param { id } res.params 
  * @param {} res.query 
- * @param { userid , email, password, name, phone, smsalert, authority, photo  } res.body 
+ * @param { userid , email, password, name, phone  } res.body 
  * @param {*} next 
  */
 UserController.updateUser = async (req, res, next) => {
     let result = []
     const { id } = _.get(req, 'params')
-    const { userid , email, password, name, phone, smsalert, authority, photo  } = req.body;
+    const { userid , email, password, name, phone  } = req.body;
     let update = {}
 
     if (_.isEmpty(id)) {
@@ -76,7 +71,7 @@ UserController.updateUser = async (req, res, next) => {
     try {
         const result = await User.updateOne(
             { _id: id },
-            { userid , email, password, name, phone, smsalert, authority, photo  },
+            { userid , email, password, name, phone  },
             { upsert: true })
 
         res.status(200).json({ data: result })
@@ -86,7 +81,7 @@ UserController.updateUser = async (req, res, next) => {
 }
 /**
  * 
- *  유저 권한  삭제
+ *  유저   삭제
  * @param {*} req 
  * @param {id} res.params 
  * @param {*} res.body 
